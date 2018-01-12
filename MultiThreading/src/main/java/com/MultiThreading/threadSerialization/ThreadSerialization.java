@@ -34,10 +34,7 @@ public class ThreadSerialization {
 
 	Semaphore a1Done = new Semaphore(0);
 	Semaphore b1Done = new Semaphore(0);
-	Semaphore a2Done = new Semaphore(0);
-	Semaphore b2Done = new Semaphore(0);
-	Semaphore a3Done = new Semaphore(0);
-
+	
 	/**
 	 * methodA prints : A1 A2 A3
 	 * @throws InterruptedException 
@@ -53,15 +50,15 @@ public class ThreadSerialization {
 			e.printStackTrace();
 		}
 		System.out.println("A2");
-		a2Done.release();
+		a1Done.release();
 		try {
-			b2Done.acquire();
+			b1Done.acquire();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("A3");
-		a3Done.release();
+		a1Done.release();
 
 	}
 
@@ -78,15 +75,15 @@ public class ThreadSerialization {
 		System.out.println("B1");
 		b1Done.release();
 		try {
-			a2Done.acquire();
+			a1Done.acquire();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("B2");
-		b2Done.release();
+		b1Done.release();
 		try {
-			a3Done.acquire();
+			a1Done.acquire();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
